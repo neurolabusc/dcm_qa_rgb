@@ -1,0 +1,17 @@
+{
+	"InstitutionalDepartmentName": "None",
+	"PatientPosition": "HFS",
+	"SeriesDescription": "j2k_rct",
+	"ProtocolName": "j2k_rct",
+	"SeriesNumber": 12,
+	"SliceThickness": 1,
+	"ImageOrientationPatientDICOM": [
+		1,
+		0,
+		0,
+		0,
+		1,
+		0	],
+	"ConversionSoftware": "dcm2niix",
+	"ConversionSoftwareVersion": "v1.0.20261105"
+}

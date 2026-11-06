@@ -1,0 +1,17 @@
+{
+	"InstitutionalDepartmentName": "None",
+	"PatientPosition": "HFS",
+	"SeriesDescription": "rgb_multiframe",
+	"ProtocolName": "rgb_multiframe",
+	"SeriesNumber": 6,
+	"SliceThickness": 1,
+	"ImageOrientationPatientDICOM": [
+		1,
+		0,
+		0,
+		0,
+		1,
+		0	],
+	"ConversionSoftware": "dcm2niix",
+	"ConversionSoftwareVersion": "v1.0.20261105"
+}

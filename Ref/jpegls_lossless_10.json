@@ -1,0 +1,17 @@
+{
+	"InstitutionalDepartmentName": "None",
+	"PatientPosition": "HFS",
+	"SeriesDescription": "jpegls_lossless",
+	"ProtocolName": "jpegls_lossless",
+	"SeriesNumber": 10,
+	"SliceThickness": 1,
+	"ImageOrientationPatientDICOM": [
+		1,
+		0,
+		0,
+		0,
+		1,
+		0	],
+	"ConversionSoftware": "dcm2niix",
+	"ConversionSoftwareVersion": "v1.0.20261105"
+}
