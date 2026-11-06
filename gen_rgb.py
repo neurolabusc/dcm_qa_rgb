@@ -16,6 +16,7 @@ import sys
 import tempfile
 
 import numpy as np
+from pydicom import dcmread
 from pydicom.dataset import Dataset, FileMetaDataset
 from pydicom.encaps import encapsulate
 from pydicom.uid import (
@@ -153,9 +154,7 @@ def main():
     ds.PixelData = rgb_to_ybr_full(rgb).tobytes()
     save(ds, "ybr_full")
 
-    # No 16-bit RGB case: dcm2niix refuses it ("Unsupported DICOM bit-depth 16
-    # with 3 samples per pixel") and exits non-zero, which would stop batch.sh.
-
+    # No 16-bit RGB case (see README).
     ds = base("rgb_multiframe", 6)
     ds.NumberOfFrames = FRAMES
     ds.PixelData = b"".join(expected(f).tobytes() for f in range(FRAMES))
@@ -185,8 +184,6 @@ def main():
         dst = os.path.join(IN, name, name + ".dcm")
         tool(*cmd, src, dst)
         # Distinct series: patch the copied identity with pydicom.
-        from pydicom import dcmread
-
         ds = dcmread(dst)
         ds.SeriesNumber, ds.SeriesDescription, ds.ProtocolName = series, name, name
         ds.SeriesInstanceUID = generate_uid(entropy_srcs=["dcm_qa_rgb", name, "series"])

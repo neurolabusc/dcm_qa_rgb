@@ -14,7 +14,7 @@ exists() {
 # we assume it is in the users path
 # however, this could be set explicitly, e.g.
 #  exenam="/Users/rorden/Documents/cocoa/dcm2niix/console/dcm2niix" batch.sh
-exenam=${examnam:-dcm2niix}
+exenam=${exenam:-dcm2niix}
 
 #basedir is folder with "Ref" and "In" subfolders.
 # we assume it is the same same folder as the script
@@ -85,12 +85,12 @@ $exenam ${flags} -o "$outdir" "$indir"
 set +x
 
 # Validate JSON.
-exists python &&
+exists python3 &&
     {
         printf "\n\n\nValidating JSON files.\n\n\n"
         for file in $outdir/*.json; do
             echo -n "$file "
-            ! python -m json.tool "$file" > /dev/null || echo " --  Valid."
+            ! python3 -m json.tool "$file" > /dev/null || echo " --  Valid."
         done
         printf "\n\n\n"
     }
@@ -103,12 +103,9 @@ dsstore=${outdir}/.DS_Store
 
 #check differences
 
-set -x
-diff -x '.*' -br "$refdir" "$outdir" -I ConversionSoftwareVersion -I BidsGuess
-set +x
-
-# Check pixels against the generator's ground truth and independent decoders.
+# Pixel checks first: a Ref diff failure (set -e) must not hide them.
 set -x
 python3 "${basedir}/verify.py" "$outdir"
+diff -x '.*' -br "$refdir" "$outdir" -I ConversionSoftwareVersion -I BidsGuess
 set +x
 
